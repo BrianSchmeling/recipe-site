@@ -4,6 +4,7 @@ import "./App.css";
 import NavBar from "./Components/NavBar/NavBar";
 import Home from "./Components/Home/Home";
 import RecipeList from "./Components/RecipeList/RecipeList";
+import ShowRecipe from "./Components/ShowRecipe/ShowRecipe";
 
 function App() {
   const [recipes, setRecipes] = useState([]);
@@ -33,7 +34,8 @@ function App() {
       <main>
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="recipelist" element={<RecipeList recipes={recipes} />} />
+          <Route path="recipes" element={<RecipeList recipes={recipes} />} />
+          <Route path={"recipes/:id"} element={<ShowRecipe />} />
         </Routes>
       </main>
     </div>
