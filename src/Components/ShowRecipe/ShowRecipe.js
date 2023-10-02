@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
+import useDidMountEffect from "../../Hooks/useDidMountEffect";
+// useDidMountEffect functions like useEffect, except it does not run on the initial render
+import "./ShowRecipe.css";
 
 const ShowRecipe = (props) => {
   const [foundRecipe, setFoundRecipe] = useState();
   const recipeId = useParams().id;
-  console.log(recipeId);
 
   const findRecipe = async () => {
     try {
@@ -22,17 +24,29 @@ const ShowRecipe = (props) => {
     }
   };
 
-  console.log(foundRecipe);
-
   useEffect(() => {
     findRecipe();
   }, []);
 
+  const ingredients = () => {
+    console.log(foundRecipe);
+  };
+
+  useDidMountEffect(() => {
+    ingredients();
+  }, [foundRecipe]);
+
+  //   if (foundRecipe != undefined) {
+  //     // ingredients();
+  //     console.log("h");
+  //   }
+
   return (
-    <div>
+    <div className="mainDiv">
       {foundRecipe ? (
         <div>
           <h1>{foundRecipe.mealName}</h1>
+          <h2>{foundRecipe.description}</h2>
         </div>
       ) : (
         <div></div>
