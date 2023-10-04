@@ -28,28 +28,38 @@ const ShowRecipe = (props) => {
     findRecipe();
   }, []);
 
-  const ingredients = () => {
-    console.log(foundRecipe);
-  };
-
-  useDidMountEffect(() => {
-    ingredients();
-  }, [foundRecipe]);
-
-  //   if (foundRecipe != undefined) {
-  //     // ingredients();
-  //     console.log("h");
-  //   }
-
   return (
     <div className="mainDiv">
       {foundRecipe ? (
-        <div>
+        <div className="center">
           <h1>{foundRecipe.mealName}</h1>
           <h2>{foundRecipe.description}</h2>
+          <div className="displayGrid">
+            <div>Ingredients</div>
+            <div>Instructions</div>
+            <div>
+              {foundRecipe.ingredients.map((ing) => {
+                return (
+                  <div key={ing.name} className="ingredientBox">
+                    <p>{ing.name}</p>
+                    <p>{ing.count}</p>
+                  </div>
+                );
+              })}
+            </div>
+            <div>
+              {foundRecipe.instructions.map((ins) => {
+                return (
+                  <div key={ins} className="ingredientBox">
+                    <p>{ins}</p>
+                  </div>
+                );
+              })}
+            </div>
+          </div>
         </div>
       ) : (
-        <div></div>
+        <div>Page Loading...</div>
       )}
     </div>
   );
